@@ -28,7 +28,7 @@ Issues should be reported in the GitHub repo's issue tab. Include a link to it.
 
 ## Authors
 
-* **Jatinder Luthra** - *Initial work* - [Delphix](https://github.com/delphix)
+* **Jatinder Luthra** - [Delphix](https://github.com/delphix)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
