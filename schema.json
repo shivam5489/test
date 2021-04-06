@@ -1,0 +1,266 @@
+{
+   "repositoryDefinition":{
+      "type":"object",
+      "ordering": ["oraHome","oraBase","oraEdition","toolkitName","delphixTookitPath","prettyName"],
+      "additionalProperties":false,
+      "properties":{
+        "oraBase":{
+           "type":"string",
+           "prettyName":"Oracle Base",
+           "description":""
+        },
+        "oraEdition":{
+           "type":"string",
+           "prettyName":"Oracle Edition",
+           "description":""
+        },
+         "toolkitName":{
+            "type":"string",
+            "prettyName":"Plugin",
+            "description":""
+         },
+         "delphixTookitPath":{
+            "type":"string",
+            "prettyName":"Delphix Connector Path",
+            "description":""
+         },
+         "oraHome": {
+		     "type": "string",
+		     "prettyName": "Oracle Home",
+		     "description": ""
+	     },
+       "prettyName": {
+       "type": "string",
+       "prettyName": "Repository Name",
+       "description": ""
+     }
+      },
+      "nameField":"prettyName",
+      "identityFields":["prettyName"]
+   },
+   "sourceConfigDefinition":{
+      "type":"object",
+      "required":["dbName","dbUniqName","dbIdentityName"],
+      "ordering": ["dbName","dbUniqName","dbIdentityName"],
+      "additionalProperties":false,
+      "properties":{
+         "dbName":{
+            "type":"string",
+            "prettyName":"Database Name",
+            "description": "Must match source database db_name including case"
+         },
+         "dbUniqName":{
+            "type":"string",
+            "prettyName":"Database Unique Name",
+            "description": "db_unique_name for staging database"
+         },
+         "dbIdentityName":{
+            "type":"string",
+            "prettyName":"Database Unique Identity [ db_name-db_unique_name ]",
+            "description": "Identity field"
+         }
+      },
+      "nameField":"dbUniqName",
+      "identityFields":[
+         "dbName","dbUniqName"
+      ]
+   },
+   "virtualSourceDefinition": {
+        "type": "object",
+        "required":[
+           "mountPath","instanceName","dbuniqueName","dbName","username","password"
+        ],
+        "ordering":[
+           "mountPath","instanceName","dbuniqueName","dbName","username","password","archivelogMode","customInitParams","customInitParamsFile"
+        ],
+        "additionalProperties" : false,
+        "properties" : {
+          "mountPath": {
+ 						"type": "string",
+ 						"format": "windowspath",
+ 						"prettyName": "Mount Path on Target Host",
+ 						"description": "Where to mount storage onto the target host while provisioning",
+ 						"default": ""
+ 					},
+          "instanceName": {
+             "default": "",
+             "type": "string",
+             "prettyName": "Instance Name",
+             "description": "Virtual Database Instance Name"
+           },
+          "dbuniqueName": {
+            "default": "",
+  					"type": "string",
+  					"pattern": "^$|^[_a-zA-Z0-9]*$",
+  					"prettyName": "Database Unique Name",
+  					"description": ""
+          },
+          "dbName": {
+            "default": "",
+  					"type": "string",
+  					"pattern": "^$|^[_a-zA-Z0-9]*$",
+  					"prettyName": "Database Name",
+  					"description": ""
+          },
+          "username": {
+						"default": "",
+						"type": "string",
+						"prettyName": "Username",
+						"description": "Oracle User Name"
+					},
+          "password": {
+						"default": "",
+						"type": "string",
+            "format": "password",
+						"prettyName": "Password",
+						"description": "Oracle User Password"
+					},
+          "customInitParamsFile": {
+          	"default": "",
+					  "type": "string",
+					  "prettyName": "Custom init.ora parameters file",
+					  "description": "Each line in file, parameter=value"
+				},
+        "archivelogMode": {
+            "default": false,
+  					"prettyName": "No Archivelog Mode",
+  					"type": "boolean",
+  					"description": ""
+  			},
+        "customInitParams" : {
+				   "type" : "array",
+				   "prettyName" : "Customize init.ora parameters",
+				   "description" : "",
+				   "items": {
+					  "type": "object",
+					  "required": ["propertyName","value"],
+					  "ordering": ["propertyName", "value"],
+					  "properties": {
+						 "propertyName" : {
+							"type" : "string",
+							"prettyName": "Parameter Name",
+							"pattern": "^$|^[_a-zA-Z0-9]*$",
+							"default": "",
+							"maxLength": 40
+						 },
+						 "value": {
+							"type": "string",
+							"prettyName": "Value",
+							"pattern": "^$|^[_a-zA-Z0-9]*$",
+							"default": "",
+							"maxLength": 100
+						 }
+					  }
+				   }
+				}
+      }
+    },
+   "linkedSourceDefinition":{
+      "type":"object",
+      "required":["instanceName","mountPath","dbid","dbrmanbkploc","dbctrlbkppiece","username","password"],
+      "ordering": ["instanceName","mountPath","dbid","dbrmanbkploc","dbctrlbkppiece","username","password","customInitParams","customInitParamsFile","rmanChannels"],
+      "additionalProperties":false,
+      "properties":{
+        "instanceName": {
+           "default": "",
+           "type": "string",
+           "prettyName": "Instance Name",
+           "description": "Staging Instance Name"
+         },
+         "mountPath": {
+						"type": "string",
+						"format": "windowspath",
+						"prettyName": "Mount Path on Staging Host",
+						"description": "Where to mount storage onto the staging host while syncing",
+						"default": ""
+					},
+          "dbid": {
+						"default": "",
+						"type": "string",
+						"pattern": "^$|^[0-9]*$",
+						"prettyName": "Source Database DBID",
+						"description": ""
+					},
+					"dbrmanbkploc": {
+						"default": "",
+						"type": "string",
+						"pattern": "^$|^[^\\s]*$",
+						"prettyName": "Database disk backup location",
+						"description": "Backup Location with no ending \\"
+					},
+					"dbctrlbkppiece": {
+						"default": "",
+						"type": "string",
+						"pattern": "^$|^[^\\s]*$",
+						"prettyName": "Source Database Controlfile disk backup piece name",
+						"description": ""
+					},
+          "username": {
+						"default": "",
+						"type": "string",
+						"prettyName": "Username",
+						"description": "Oracle User Name"
+					},
+          "password": {
+						"default": "",
+						"type": "string",
+            "format": "password",
+						"prettyName": "Password",
+						"description": "Oracle User Password"
+					},
+          "customInitParamsFile": {
+          	"default": "",
+					  "type": "string",
+					  "prettyName": "Custom init.ora parameters file",
+					  "description": "Each line in file, parameter=value"
+				},
+        "customInitParams" : {
+				   "type" : "array",
+				   "prettyName" : "Customize init.ora parameters",
+				   "description" : "",
+				   "items": {
+					  "type": "object",
+					  "required": ["propertyName","value"],
+					  "ordering": ["propertyName", "value"],
+					  "properties": {
+						 "propertyName" : {
+							"type" : "string",
+							"prettyName": "Parameter Name",
+							"pattern": "^$|^[_a-zA-Z0-9]*$",
+							"default": "",
+							"maxLength": 40
+						 },
+						 "value": {
+							"type": "string",
+							"prettyName": "Value",
+							"pattern": "^$|^[_a-zA-Z0-9]*$",
+							"default": "",
+							"maxLength": 100
+						 }
+					  }
+				   }
+				},
+        "rmanChannels": {
+  						"default": 2,
+  						"type": "integer",
+  						"prettyName": "RMAN Channels",
+  						"description": "RMAN channels for restore"
+  				}
+      }
+   },
+   "snapshotDefinition":{
+      "type":"object",
+      "additionalProperties":false,
+      "properties":{
+        "oracleHome": {"type": "string"},
+        "delphixTookitPath": {"type": "string"},
+        "oraInst": {"type": "string"},
+        "oraUser": {"type": "string"},
+        "oraBase": {"type": "string"},
+        "oraBkpLoc": {"type": "string"},
+        "oraSrc": {"type": "string"},
+        "oraUnq": {"type": "string"},
+        "srcType": {"type": "string"}
+      }
+   }
+}
