@@ -10,13 +10,9 @@ The Delphix virtualization SDK (https://github.com/delphix/virtualization-sdk) p
 
 Oracle on Windows Plugin is designed for virtualizing Oracle database running on Windows Platform. This plugin provides all key benefits of Delphix virtualization including provisioning, refresh, rewind, etc.
 
-### Prerequisites
+### User Documentation
 
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
+Documentation to install, build, upload and use the plugin is available at: https://jatinder-luthra.github.io/oracle-on-windows-plugin/
 
 ### Installing
 
