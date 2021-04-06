@@ -34,7 +34,7 @@ See also the list of [contributors](https://github.com/your/project/contributors
 
 ## License
 
-This project is licensed under the XX License - see the [LICENSE.md](LICENSE.md) file for details
+This is code is licensed under the Apache License 2.0. Full license is available [here](./LICENSE).
 
 ## Statement of Support
 
