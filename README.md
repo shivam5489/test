@@ -1,12 +1,14 @@
 # Oracle on Windows Plugin
 
-Oracle on Windows Plugin is designed for virtualizing Oracle database running on Windows Platform. This plugin provides all key benefits of virtualization including provisioning, refresh, rewind, etc.
-
 ## What Does a Delphix Plugin Do?
 
 Delphix is a data management platform that provides the ability to securely copy and share datasets. Using virtualization, you will ingest your data sources and create virtual data copies, which are full read-write capable database instances that use a small fraction of the resources a normal database copy would require. The Delphix engine has built-in support for interfacing with certain types of datasets, such as Oracle, SQL Server and ASE.
 
 The Delphix virtualization SDK (https://github.com/delphix/virtualization-sdk) provides an interface for building custom data source integrations for the Delphix Dynamic Data Platform. The end users can design/implement a custom plugin which enable them to use custom data source like MongoDB, MySQL, Cassandra, Couchbase or any other datasource similar to built-in dataset types like Oracle, SQL Server, vFiles etc with Delphix Engine.
+
+## Oracle on Windows Plugin
+
+Oracle on Windows Plugin is designed for virtualizing Oracle database running on Windows Platform. This plugin provides all key benefits of Delphix virtualization including provisioning, refresh, rewind, etc.
 
 ### Prerequisites
 
