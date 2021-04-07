@@ -1,3 +1,7 @@
+#
+# Copyright (c) 2021 by Delphix. All rights reserved.
+#
+
 import logging, pkgutil, json
 
 from dlpx.virtualization import libs
