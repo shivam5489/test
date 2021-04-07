@@ -1,3 +1,7 @@
+#
+# Copyright (c) 2021 by Delphix. All rights reserved.
+#
+
 import pkgutil, json
 from dlpx.virtualization import libs
 from dlpx.virtualization.libs import exceptions
