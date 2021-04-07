@@ -1,3 +1,7 @@
+#
+# Copyright (c) 2021 by Delphix. All rights reserved.
+#
+
 from utils import setupLogger, executeScript
 from dlpx.virtualization.platform import Status
 import json
