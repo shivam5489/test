@@ -1,3 +1,7 @@
+#
+# Copyright (c) 2021 by Delphix. All rights reserved.
+#
+
 from dlpx.virtualization.platform import Mount, MountSpecification, Plugin
 from operations import discovery, restore, provision, postSnapshot, enable, disable, start, stop, status
 
