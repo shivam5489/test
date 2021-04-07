@@ -12,7 +12,7 @@ Oracle on Windows Plugin is designed for virtualizing Oracle database running on
 
 ### User Documentation
 
-Documentation to install, build, upload and use the plugin is available at: https://jatinder-luthra.github.io/oracle-on-windows-plugin/
+Documentation to install, build, upload and use the plugin is available at: https://delphix.github.io/oracle-on-windows-plugin/
 
 ## Contributing
 
