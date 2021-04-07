@@ -1,3 +1,7 @@
+#
+# Copyright (c) 2021 by Delphix. All rights reserved.
+#
+
 import datetime
 import pydoc
 import re
