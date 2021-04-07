@@ -1,3 +1,7 @@
+#
+# Copyright (c) 2021 by Delphix. All rights reserved.
+#
+
 from utils import setupLogger, executeScript
 from generated.definitions import RepositoryDefinition, SourceConfigDefinition
 import json
