@@ -248,7 +248,19 @@
   				}
       }
    },
-   "snapshotDefinition":{
+	"snapshotParametersDefinition": {
+        "type" : "object",
+        "additionalProperties" : false,
+        "properties" : {
+            "resync" :
+            {
+                "type": "boolean",
+                "prettyName": "Resynchronize dSource",
+                "description": "Resynchronizing dSource will force a non-incremental load of data from the source. This operation is similar to creating a new dSource, but avoids duplicating storage requirements and maintains Timeflow history. Are you sure you want to Resynchronize this dSource?"
+            }
+        }
+    },
+	"snapshotDefinition":{
       "type":"object",
       "additionalProperties":false,
       "properties":{

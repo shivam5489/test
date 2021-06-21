@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2020 by Delphix. All rights reserved.
+# Copyright (c) 2021 by Delphix. All rights reserved.
 #
 # Author: Jatinder Luthra
 # Date: 09-23-2020
@@ -18,6 +18,7 @@ $oracleHome = $env:ORACLE_HOME
 $scriptDir = "${delphixToolkitPath}\scripts"
 
 . $scriptDir\delphixLibrary.ps1
+. $scriptDir\oracleLibrary.ps1
 
 log "Executing $programName"
 
@@ -32,6 +33,10 @@ log "ORACLE_SID: $oraUnq"
 ######### VDB Status ######
 
 log "Status VDB, $oraUnq STARTED"
+
+$srvc_status = check_srvc_status $oraUnq
+
+log "Status of $oraUnq Service, $srvc_status"
 
 $sqlQuery=@"
 WHENEVER SQLERROR EXIT SQL.SQLCODE
@@ -49,11 +54,11 @@ $result = $sqlQuery |  . $Env:ORACLE_HOME\bin\sqlplus.exe -silent " /as sysdba"
 
 log "[SQL - vdb_status] $result"
 
-if ($result -eq "READ WRITE"){
+if (($result -eq "READ WRITE") -and ($srvc_status -eq "Running")) {
   echo "ACTIVE"
 }
 else {
    echo "INACTIVE"
 }
 
-log "Status VDB, $oraUnq FINISHED"
+exit 0

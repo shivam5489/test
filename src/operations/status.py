@@ -29,7 +29,7 @@ def vdb_status (virtual_connection,parameters,repository,source_config):
 
     status_vdb =  executeScript.execute_powershell(virtual_connection,'vdb_status.ps1',env)
     logger.debug("Status VDB: {}".format(status_vdb))
-    status = Status.ACTIVE if ( status_vdb == "ACTIVE") else Status.INACTIVE
+    status = Status.ACTIVE if (status_vdb == "ACTIVE") else Status.INACTIVE
     logger.debug("status for {} : {}".format(parameters.dbunique_name, status))
     return status
 

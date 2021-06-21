@@ -9,6 +9,7 @@ from generated.definitions import (
     RepositoryDefinition,
     SourceConfigDefinition,
     SnapshotDefinition,
+    SnapshotParametersDefinition,
 )
 
 plugin = Plugin()
@@ -42,12 +43,12 @@ def source_config_discovery(source_connection, repository):
 
 
 @plugin.linked.post_snapshot()
-def linked_post_snapshot(staged_source,repository,source_config,snapshot_parameters):
+def linked_post_snapshot(staged_source,repository,source_config,optional_snapshot_parameters):
 
     source_connection = staged_source.staged_connection
     parameters = staged_source.parameters
 
-    return postSnapshot._make_ds_postsnapshot(source_connection,parameters,repository,source_config,snapshot_parameters)
+    return postSnapshot._make_ds_postsnapshot(source_connection,parameters,repository,source_config,optional_snapshot_parameters)
     #return SnapshotDefinition()
 
 
@@ -60,13 +61,13 @@ def linked_mount_specification(staged_source, repository):
     return MountSpecification(mounts)
 
 @plugin.linked.pre_snapshot()
-def restore_oracle_backup(staged_source,repository,source_config,snapshot_parameters):
+def restore_oracle_backup(staged_source,repository,source_config,optional_snapshot_parameters):
 
     source_connection = staged_source.staged_connection
     parameters = staged_source.parameters
 
-    if snapshot_parameters.resync:
-        return restore.initial_sync(source_connection,parameters,repository,source_config)
+    if optional_snapshot_parameters.resync:
+        return restore.initial_sync(source_connection,parameters,repository,source_config),
     else:
         return restore.incremental_sync(source_connection,parameters,repository,source_config)
 

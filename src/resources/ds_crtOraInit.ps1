@@ -65,6 +65,7 @@ echo "*.remote_login_passwordfile='EXCLUSIVE'" >> ${initfile}
 echo "*.sga_target=3G" >> ${initfile}
 echo "*.db_files=1500" >> ${initfile}
 echo "*._omf=disabled" >> ${initfile}
+#echo "enable_pluggable_database=TRUE" >> ${initfile}
 #echo "${oraUnq}.undo_tablespace='UNDOTBS1'" >> ${initfile}
 
 log "Creation of base init.ora $initfile FINISHED"
