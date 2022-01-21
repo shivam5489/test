@@ -61,18 +61,7 @@ log "[DBLogDir Already Exists] $DBlogDir"
 $PSDefaultParameterValues['*:Encoding'] = 'ascii'
 
 
- #### there are two reasons for connecting to RMAN
- #### 1) v$rman views might not be present in a mounted database unless you first connect to it with RMAN
- #### 2) the control file might have some SBT backups in its catalog, which will cause error during restore
- $testRman =@"
- allocate channel for maintenance device type sbt parms 'SBT_LIBRARY=oracle.disksbt, ENV=(BACKUP_DIR=c:\tmp)';
- delete noprompt force obsolete;
- crosscheck backup;
- delete nonprompt backup device type SBT;
- exit
-"@ 
 
- $result = $testRman | . $Env:ORACLE_HOME\bin\rman.exe target /
 
  #### get end time 
  $sqlQuery=@"
@@ -96,6 +85,21 @@ if ($LASTEXITCODE -ne 0){
 echo "Sql Query failed with ORA-$LASTEXITCODE"
 exit 1
 }
+
+ #### there are two reasons for connecting to RMAN
+ #### 1) v$rman views might not be present in a mounted database unless you first connect to it with RMAN
+ #### 2) the control file might have some SBT backups in its catalog, which will cause error during restore
+ $testRman =@"
+ allocate channel for maintenance device type sbt parms 'SBT_LIBRARY=oracle.disksbt, ENV=(BACKUP_DIR=c:\tmp)';
+ delete noprompt force obsolete;
+ crosscheck backup;
+ delete nonprompt backup device type SBT;
+ crosscheck backup;
+ delete force noprompt expired backup;
+ exit
+"@ 
+
+ $result = $testRman | . $Env:ORACLE_HOME\bin\rman.exe target /
 
 ##### move existing to last
 if (Test-Path $stgMnt\$oraSrc\new_ctl_bkp_endtime.txt) {
@@ -145,7 +149,7 @@ remove_empty_lines "$stgMnt\$oraSrc\new_ctl_bkp_endscn.txt"
 log "Creating Restore Scripts, $restorecmdfile STARTED"
 
 echo "crosscheck backup;" > $restorecmdfile
-echo "delete noprompt expired backup;" >> $restorecmdfile
+echo "delete force noprompt expired backup;" >> $restorecmdfile
 echo "catalog start with '$oraBkpLoc\' noprompt;" >> $restorecmdfile
 echo "crosscheck backup;" >> $restorecmdfile
 echo "set echo on" >> $restorecmdfile
