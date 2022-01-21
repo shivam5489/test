@@ -137,17 +137,3 @@ function postSnapErrorCapture {
 }
 
 log "ENVIRONMENT VARS"
-
-try {
-   import-module sqlps -erroraction stop -WarningAction SilentlyContinue
-   sqlserver:
-}
-catch [System.IO.FileNotFoundException] {
-   add-pssnapin sqlserverprovidersnapin100
-   add-pssnapin sqlservercmdletsnapin100
-}
-catch {
-   echo "Caught an exception (${timestamp}):"
-   echo "Exception Type: $($_.Exception.GetType().FullName)"
-   echo "Exception Message: $($_.Exception.Message)"
-}

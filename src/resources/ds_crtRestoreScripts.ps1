@@ -60,8 +60,21 @@ log "[DBLogDir Already Exists] $DBlogDir"
 # set powershell default encoding to UTF8
 $PSDefaultParameterValues['*:Encoding'] = 'ascii'
 
-#### get end time
 
+ #### there are two reasons for connecting to RMAN
+ #### 1) v$rman views might not be present in a mounted database unless you first connect to it with RMAN
+ #### 2) the control file might have some SBT backups in its catalog, which will cause error during restore
+ $testRman =@"
+ allocate channel for maintenance device type sbt parms 'SBT_LIBRARY=oracle.disksbt, ENV=(BACKUP_DIR=c:\tmp)';
+ delete noprompt force obsolete;
+ crosscheck backup;
+ delete nonprompt backup device type SBT;
+ exit
+"@ 
+
+ $result = $testRman | . $Env:ORACLE_HOME\bin\rman.exe target /
+
+ #### get end time 
  $sqlQuery=@"
  WHENEVER SQLERROR EXIT SQL.SQLCODE
  set serveroutput off
@@ -101,6 +114,7 @@ remove_empty_lines "$stgMnt\$oraSrc\new_ctl_bkp_endtime.txt"
  set heading off
  set echo off
  set NewPage none
+ set numwidth 40
 select (greatest(max(absolute_fuzzy_change#),max(checkpoint_change#))) "endscn" from (select file#, completion_time, checkpoint_change#, absolute_fuzzy_change# from v`$backup_datafile where (incremental_level in ( 0, 1 ) OR incremental_level is null) and trunc(completion_time) = trunc(to_date('$end_time','dd-mon-yyyy hh24:mi:ss')) and file# <> 0 and completion_time <= to_date('$end_time','dd-mon-yyyy hh24:mi:ss') order by completion_time desc);
  exit
 "@
@@ -130,7 +144,10 @@ remove_empty_lines "$stgMnt\$oraSrc\new_ctl_bkp_endscn.txt"
 
 log "Creating Restore Scripts, $restorecmdfile STARTED"
 
-echo "catalog start with '$oraBkpLoc\' noprompt;" > $restorecmdfile
+echo "crosscheck backup;" > $restorecmdfile
+echo "delete noprompt expired backup;" >> $restorecmdfile
+echo "catalog start with '$oraBkpLoc\' noprompt;" >> $restorecmdfile
+echo "crosscheck backup;" >> $restorecmdfile
 echo "set echo on" >> $restorecmdfile
 echo "RUN" >> $restorecmdfile
 echo "{" >> $restorecmdfile

@@ -57,6 +57,7 @@ class SnapshotParametersDefinition(Model):
     def resync(self):
         """Gets the resync of this SnapshotParametersDefinition.
 
+        Resynchronizing dSource will force a non-incremental load of data from the source. This operation is similar to creating a new dSource, but avoids duplicating storage requirements and maintains Timeflow history. Are you sure you want to Resynchronize this dSource?
 
         :return: The resync of this SnapshotParametersDefinition.
         :rtype: bool
@@ -67,6 +68,7 @@ class SnapshotParametersDefinition(Model):
     def resync(self, resync):
         """Sets the resync of this SnapshotParametersDefinition.
 
+        Resynchronizing dSource will force a non-incremental load of data from the source. This operation is similar to creating a new dSource, but avoids duplicating storage requirements and maintains Timeflow history. Are you sure you want to Resynchronize this dSource?
 
         :param resync: The resync of this SnapshotParametersDefinition.
         :type resync: bool

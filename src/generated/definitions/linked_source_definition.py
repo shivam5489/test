@@ -6,7 +6,7 @@ from datetime import date, datetime
 
 from generated.definitions.base_model_ import (
     Model, GeneratedClassesError, GeneratedClassesTypeError)
-from generated.definitions.linked_source_definition_custom_init_params import LinkedSourceDefinitionCustomInitParams
+from generated.definitions.virtual_source_definition_custom_init_params import VirtualSourceDefinitionCustomInitParams
 import re
 from generated import util
 
@@ -30,7 +30,7 @@ class LinkedSourceDefinition(Model):
             :param custom_init_params_file: The custom_init_params_file of this LinkedSourceDefinition.
             :type custom_init_params_file: str
             :param custom_init_params: The custom_init_params of this LinkedSourceDefinition.
-            :type custom_init_params: List[LinkedSourceDefinitionCustomInitParams]
+            :type custom_init_params: List[VirtualSourceDefinitionCustomInitParams]
             :param rman_channels: The rman_channels of this LinkedSourceDefinition.
             :type rman_channels: int
             :param dbctrlbkppiece: The dbctrlbkppiece of this LinkedSourceDefinition.
@@ -50,7 +50,7 @@ class LinkedSourceDefinition(Model):
             'mount_path': str,
             'dbid': str,
             'custom_init_params_file': str,
-            'custom_init_params': util.convert_type('List[LinkedSourceDefinitionCustomInitParams]'),
+            'custom_init_params': util.convert_type('List[VirtualSourceDefinitionCustomInitParams]'),
             'rman_channels': int,
             'dbctrlbkppiece': str,
             'password': str,
@@ -126,8 +126,8 @@ class LinkedSourceDefinition(Model):
         self._custom_init_params_file = custom_init_params_file
 
         # Validating the attribute custom_init_params and then saving it.
-        expected_type = util.convert_type('List[LinkedSourceDefinitionCustomInitParams]')
-        element_type = util.get_contained_type('List[LinkedSourceDefinitionCustomInitParams]')
+        expected_type = util.convert_type('List[VirtualSourceDefinitionCustomInitParams]')
+        element_type = util.get_contained_type('List[VirtualSourceDefinitionCustomInitParams]')
         type_error = GeneratedClassesTypeError.type_error(LinkedSourceDefinition,
                                                           'custom_init_params',
                                                           custom_init_params,
@@ -361,7 +361,7 @@ class LinkedSourceDefinition(Model):
         
 
         :return: The custom_init_params of this LinkedSourceDefinition.
-        :rtype: List[LinkedSourceDefinitionCustomInitParams]
+        :rtype: List[VirtualSourceDefinitionCustomInitParams]
         """
         return self._custom_init_params
 
@@ -372,11 +372,11 @@ class LinkedSourceDefinition(Model):
         
 
         :param custom_init_params: The custom_init_params of this LinkedSourceDefinition.
-        :type custom_init_params: List[LinkedSourceDefinitionCustomInitParams]
+        :type custom_init_params: List[VirtualSourceDefinitionCustomInitParams]
         """
         # Validating the attribute custom_init_params and then saving it.
-        expected_type = util.convert_type('List[LinkedSourceDefinitionCustomInitParams]')
-        element_type = util.get_contained_type('List[LinkedSourceDefinitionCustomInitParams]')
+        expected_type = util.convert_type('List[VirtualSourceDefinitionCustomInitParams]')
+        element_type = util.get_contained_type('List[VirtualSourceDefinitionCustomInitParams]')
         type_error = GeneratedClassesTypeError.type_error(LinkedSourceDefinition,
                                                           'custom_init_params',
                                                           custom_init_params,
