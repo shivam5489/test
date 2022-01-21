@@ -61,7 +61,11 @@ log "[DBLogDir Already Exists] $DBlogDir"
 $PSDefaultParameterValues['*:Encoding'] = 'ascii'
 
 
+ #### there are two reasons for connecting to RMAN
+ #### 1) v$rman views might not be present in a mounted database unless you first connect to it with RMAN
+ $testRman ='exit;' 
 
+ $result = $testRman | . $Env:ORACLE_HOME\bin\rman.exe target /
 
  #### get end time 
  $sqlQuery=@"

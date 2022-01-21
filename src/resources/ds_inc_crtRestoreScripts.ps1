@@ -59,6 +59,11 @@ log "[DBLogDir Already Exists] $DBlogDir"
 # set powershell default encoding to UTF8
 $PSDefaultParameterValues['*:Encoding'] = 'ascii'
 
+ #### there are two reasons for connecting to RMAN
+ #### 1) v$rman views might not be present in a mounted database unless you first connect to it with RMAN
+ $testRman ='exit;'
+
+ $result = $testRman | . $Env:ORACLE_HOME\bin\rman.exe target /
 
  ########### get_end_time
  $sqlQuery=@"
