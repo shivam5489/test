@@ -75,7 +75,7 @@ $PSDefaultParameterValues['*:Encoding'] = 'ascii'
  crosscheck backup;
  delete force nonprompt backup device type SBT;
  crosscheck backup;
- delete force noprompt expired backup device type SBT;;
+ delete force noprompt expired backup device type SBT;
  exit
 "@ 
 
