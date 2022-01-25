@@ -73,9 +73,9 @@ $PSDefaultParameterValues['*:Encoding'] = 'ascii'
  allocate channel for maintenance device type sbt parms 'SBT_LIBRARY=oracle.disksbt, ENV=(BACKUP_DIR=c:\tmp)';
  delete force noprompt obsolete device type SBT;
  crosscheck backup;
- delete force nonprompt backup device type SBT;
- crosscheck backup;
  delete force noprompt expired backup device type SBT;
+ crosscheck backup;
+ delete force nonprompt backup device type SBT;
  exit
 "@ 
 
