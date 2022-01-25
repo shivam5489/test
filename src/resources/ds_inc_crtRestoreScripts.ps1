@@ -69,9 +69,9 @@ $PSDefaultParameterValues['*:Encoding'] = 'ascii'
  #### 2) the control file might have some SBT backups in its catalog, which will cause error during restore
  $testRman =@"
  allocate channel for maintenance device type sbt parms 'SBT_LIBRARY=oracle.disksbt, ENV=(BACKUP_DIR=c:\tmp)';
- delete noprompt force obsolete device type SBT;;
+ delete force noprompt obsolete device type SBT;
  crosscheck backup;
- delete nonprompt backup device type SBT;
+ delete force nonprompt backup device type SBT;
  crosscheck backup;
  delete force noprompt expired backup device type SBT;;
  exit
