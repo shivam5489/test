@@ -89,7 +89,7 @@ $PSDefaultParameterValues['*:Encoding'] = 'ascii'
  set heading off
  set echo off
  set NewPage none
- select to_char(max(END_TIME),'dd-mon-yyyy hh24:mi:ss') end_time from V`$RMAN_BACKUP_JOB_DETAILS where INPUT_TYPE in ('DB FULL','DB INCR') and status in ('COMPLETED','COMPLETED WITH WARNINGS');
+ select to_char(max(END_TIME),'dd-mon-yyyy hh24:mi:ss','NLS_DATE_LANGUAGE=ENGLISH') end_time from V`$RMAN_BACKUP_JOB_DETAILS where INPUT_TYPE in ('DB FULL','DB INCR') and status in ('COMPLETED','COMPLETED WITH WARNINGS');
  exit
 "@
 
