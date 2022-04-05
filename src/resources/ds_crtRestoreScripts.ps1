@@ -122,7 +122,7 @@ remove_empty_lines "$stgMnt\$oraSrc\new_ctl_bkp_endtime.txt"
  set echo off
  set NewPage none
  set numwidth 40
-select (greatest(max(absolute_fuzzy_change#),max(checkpoint_change#))) "endscn" from (select file#, completion_time, checkpoint_change#, absolute_fuzzy_change# from v`$backup_datafile where (incremental_level in ( 0, 1 ) OR incremental_level is null) and trunc(completion_time) = trunc(to_date('$end_time','dd-mon-yyyy hh24:mi:ss')) and file# <> 0 and completion_time <= to_date('$end_time','dd-mon-yyyy hh24:mi:ss') order by completion_time desc);
+select (greatest(max(absolute_fuzzy_change#),max(checkpoint_change#))) "endscn" from (select file#, completion_time, checkpoint_change#, absolute_fuzzy_change# from v`$backup_datafile where (incremental_level in ( 0, 1 ) OR incremental_level is null) and trunc(completion_time) = trunc(to_date('$end_time','dd-mon-yyyy hh24:mi:ss','NLS_DATE_LANGUAGE=ENGLISH')) and file# <> 0 and completion_time <= to_date('$end_time','dd-mon-yyyy hh24:mi:ss','NLS_DATE_LANGUAGE=ENGLISH') order by completion_time desc);
  exit
 "@
 
